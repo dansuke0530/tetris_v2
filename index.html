@@ -861,21 +861,42 @@
                 return;
             }
 
+            // 音声コンテキストの作成
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioContext = new AudioContext();
+
             // BGMの初期化
             bgm.volume = 0.3;
-            bgm.play().then(() => {
-                bgm.pause();
-                bgm.currentTime = 0;
-                isAudioInitialized = true;
-                document.querySelector('.button.sound').textContent = '🔇 音声を無効にする';
-                document.querySelector('.button.sound').style.opacity = '0.7';
-                document.querySelector('.button.sound').classList.add('active');
-                document.querySelector('.sound-status').textContent = '現在：有効';
-                document.querySelector('.sound-status').classList.add('active');
-            }).catch(error => {
-                console.log('音声初期化エラー:', error);
-                alert('音声の初期化に失敗しました。ブラウザの設定を確認してください。');
-            });
+            
+            // ユーザーインタラクションを待ってから音声を初期化
+            const initAudio = async () => {
+                try {
+                    // 音声コンテキストを開始
+                    if (audioContext.state === 'suspended') {
+                        await audioContext.resume();
+                    }
+
+                    // BGMを再生して即座に停止（初期化のため）
+                    await bgm.play();
+                    bgm.pause();
+                    bgm.currentTime = 0;
+
+                    isAudioInitialized = true;
+                    document.querySelector('.button.sound').textContent = '🔇 音声を無効にする';
+                    document.querySelector('.button.sound').style.opacity = '0.7';
+                    document.querySelector('.button.sound').classList.add('active');
+                    document.querySelector('.sound-status').textContent = '現在：有効';
+                    document.querySelector('.sound-status').classList.add('active');
+
+                    console.log('音声の初期化が完了しました');
+                } catch (error) {
+                    console.error('音声初期化エラー:', error);
+                    alert('音声の初期化に失敗しました。ブラウザの設定を確認してください。');
+                }
+            };
+
+            // ユーザーインタラクションを待ってから初期化を実行
+            initAudio();
         }
 
         // ゲーム開始処理
@@ -1592,8 +1613,17 @@
 
         // ゲーム開始時にBGMを再生
         function startBGM() {
+            if (!isAudioInitialized) return;
+            
             bgm.play().catch(error => {
-                console.log('BGM再生エラー:', error);
+                console.error('BGM再生エラー:', error);
+                // エラーが発生した場合、音声を再初期化
+                isAudioInitialized = false;
+                document.querySelector('.button.sound').textContent = '🔊 音声を有効にする';
+                document.querySelector('.button.sound').style.opacity = '1';
+                document.querySelector('.button.sound').classList.remove('active');
+                document.querySelector('.sound-status').textContent = '現在：無効';
+                document.querySelector('.sound-status').classList.remove('active');
             });
         }
 
