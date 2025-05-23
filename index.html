@@ -248,6 +248,40 @@
             background: linear-gradient(145deg, #4a3128, #3a2318);
             border-color: rgba(255, 215, 0, 0.5);
         }
+        .opening-screen .button.sound {
+            background: linear-gradient(145deg, #3a2318, #2c1810);
+            border: 2px solid rgba(0, 100, 255, 0.5);
+            font-size: 1em;
+            padding: 10px 20px;
+            margin-bottom: 5px;
+            box-shadow: 0 0 10px rgba(0, 100, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .opening-screen .button.sound:hover {
+            background: linear-gradient(145deg, #4a3128, #3a2318);
+            border-color: rgba(0, 100, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 100, 255, 0.5);
+            transform: scale(1.05);
+        }
+        .opening-screen .button.sound.active {
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        .opening-screen .button.sound.active:hover {
+            border-color: rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+        .sound-status {
+            font-size: 0.9em;
+            color: rgba(255, 0, 0, 0.7);
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+            margin-top: 5px;
+            text-align: center;
+        }
+        .sound-status.active {
+            color: rgba(0, 100, 255, 0.7);
+            text-shadow: 0 0 5px rgba(0, 100, 255, 0.3);
+        }
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -320,28 +354,60 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(44, 24, 16, 0.95);
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
+        .gameover-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(-45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px);
+            pointer-events: none;
+        }
         .gameover-screen h1 {
             font-size: 4em;
-            color: #ff0000;
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8),
-                         0 0 40px rgba(255, 0, 0, 0.4);
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+                         0 0 40px rgba(255, 215, 0, 0.4);
             margin-bottom: 30px;
             animation: pulse 2s infinite;
+            position: relative;
+        }
+        .gameover-screen h1::before,
+        .gameover-screen h1::after {
+            content: '❖';
+            position: absolute;
+            color: rgba(255, 215, 0, 0.3);
+            font-size: 0.5em;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .gameover-screen h1::before {
+            left: -50px;
+        }
+        .gameover-screen h1::after {
+            right: -50px;
         }
         .gameover-screen .score-info {
-            background: linear-gradient(145deg, #1a0f0a, #2c1810);
+            background: linear-gradient(145deg, #2c1810, #1a0f0a);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
             border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6),
+                        inset 0 0 20px rgba(255, 215, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
         .gameover-screen .score-info div {
             margin: 10px 0;
@@ -368,18 +434,20 @@
         }
         .gameover-screen .button {
             padding: 12px 24px;
-            background: linear-gradient(145deg, #1a1a1a, #000000);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: linear-gradient(145deg, #3a2318, #2c1810);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1.1em;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         .gameover-screen .button:hover {
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            background: linear-gradient(145deg, #4a3128, #3a2318);
+            border-color: rgba(255, 215, 0, 0.5);
             transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
         .gameover-screen .button.primary {
             background: linear-gradient(145deg, #0066cc, #004499);
@@ -666,6 +734,8 @@
         <div class="buttons">
             <button class="button ranking" onclick="showRanking()">ランキングを見る</button>
             <div class="ranking-note">※ランキングへ登録される名前は自動生成されます</div>
+            <button class="button sound" onclick="initializeAudio()">🔊 音声を有効にする</button>
+            <div class="sound-status">現在：無効</div>
         </div>
     </div>
 
@@ -738,10 +808,15 @@
     <audio id="bgm" loop>
         <source src="tetris_inst.wav" type="audio/wav">
     </audio>
+    <audio id="gameoverSound">
+        <source src="gameover.wav" type="audio/wav">
+    </audio>
     <script>
         // BGMの設定
         const bgm = document.getElementById('bgm');
+        const gameoverSound = document.getElementById('gameoverSound');
         bgm.volume = 0.3;  // 音量を30%に設定
+        gameoverSound.volume = 0.5;  // ゲームオーバー音の音量を50%に設定
 
         // キャンバスの設定
         const gameCanvas = document.getElementById('game');
@@ -769,6 +844,40 @@
         // ハイスコアの管理
         let highScore = localStorage.getItem('tetrisHighScore') || 0;
 
+        // 音声の初期化状態
+        let isAudioInitialized = false;
+
+        // 音声の初期化
+        function initializeAudio() {
+            if (isAudioInitialized) {
+                // 音声を無効化
+                isAudioInitialized = false;
+                stopBGM();
+                document.querySelector('.button.sound').textContent = '🔊 音声を有効にする';
+                document.querySelector('.button.sound').style.opacity = '1';
+                document.querySelector('.button.sound').classList.remove('active');
+                document.querySelector('.sound-status').textContent = '現在：無効';
+                document.querySelector('.sound-status').classList.remove('active');
+                return;
+            }
+
+            // BGMの初期化
+            bgm.volume = 0.3;
+            bgm.play().then(() => {
+                bgm.pause();
+                bgm.currentTime = 0;
+                isAudioInitialized = true;
+                document.querySelector('.button.sound').textContent = '🔇 音声を無効にする';
+                document.querySelector('.button.sound').style.opacity = '0.7';
+                document.querySelector('.button.sound').classList.add('active');
+                document.querySelector('.sound-status').textContent = '現在：有効';
+                document.querySelector('.sound-status').classList.add('active');
+            }).catch(error => {
+                console.log('音声初期化エラー:', error);
+                alert('音声の初期化に失敗しました。ブラウザの設定を確認してください。');
+            });
+        }
+
         // ゲーム開始処理
         function startGame() {
             if (isGameStarted) return;
@@ -776,7 +885,12 @@
             isGameStarted = true;
             openingScreen.style.display = 'none';
             gameContainer.style.display = 'flex';
-            startBGM();
+            
+            // 音声が初期化されている場合のみBGMを再生
+            if (isAudioInitialized) {
+                startBGM();
+            }
+            
             initializeBag();
             gameLoop();
         }
@@ -1529,7 +1643,15 @@
         // ゲームオーバー処理
         function gameOver() {
             isGameStarted = false;
-            stopBGM();
+            if (isAudioInitialized) {
+                stopBGM();
+                
+                // ゲームオーバー音を再生
+                gameoverSound.currentTime = 0;
+                gameoverSound.play().catch(error => {
+                    console.log('ゲームオーバー音再生エラー:', error);
+                });
+            }
             
             // ハイスコアの更新
             if (score > highScore) {
@@ -1543,8 +1665,8 @@
             document.getElementById('highScore').textContent = highScore;
             gameoverScreen.style.display = 'flex';
             
-            // スコアが1000点以上の場合のみ自動送信
-            if (score >= 1000) {
+            // スコアが500点以上の場合のみ自動送信
+            if (score >= 500) {
                 setTimeout(autoSubmitScore, 100);
             }
         }
@@ -1654,7 +1776,7 @@
             const rankingList = document.getElementById('rankingList');
             rankingList.innerHTML = '';
 
-            database.ref('scores').orderByChild('score').limitToLast(10).once('value')
+            database.ref('scores').orderByChild('score').limitToLast(20).once('value')
                 .then((snapshot) => {
                     const scores = [];
                     snapshot.forEach((childSnapshot) => {
