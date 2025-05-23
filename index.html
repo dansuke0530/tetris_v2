@@ -15,19 +15,19 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #2c1810, #1a0f0a);
             color: white;
             font-family: 'Arial', sans-serif;
         }
         .game-container {
             display: flex;
             gap: 30px;
-            background: linear-gradient(145deg, #1a1a1a, #000000);
+            background: linear-gradient(145deg, #2c1810, #1a0f0a);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.8),
-                        inset 0 0 20px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+                        inset 0 0 20px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -39,10 +39,10 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(45deg, 
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0) 20%,
-                rgba(255, 255, 255, 0) 80%,
-                rgba(255, 255, 255, 0.1) 100%);
+                rgba(255, 215, 0, 0.05) 0%,
+                rgba(255, 215, 0, 0) 20%,
+                rgba(255, 215, 0, 0) 80%,
+                rgba(255, 215, 0, 0.05) 100%);
             pointer-events: none;
         }
         .game-area {
@@ -51,7 +51,7 @@
             align-items: flex-start;
         }
         .hold-area, .next-area {
-            background: linear-gradient(145deg, #000000, #1a1a1a);
+            background: linear-gradient(145deg, #1a0f0a, #2c1810);
             padding: 20px;
             border-radius: 15px;
             width: 120px;
@@ -59,15 +59,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5),
-                        inset 0 0 10px rgba(255, 255, 255, 0.05);
+                        inset 0 0 10px rgba(255, 215, 0, 0.05);
         }
         .label {
-            color: #fff;
+            color: #ffd700;
             margin-bottom: 10px;
             font-size: 1.3em;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             font-weight: bold;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -96,19 +96,19 @@
                         inset 0 0 20px rgba(255, 255, 255, 0.05);
         }
         .info {
-            background: linear-gradient(145deg, #000000, #1a1a1a);
+            background: linear-gradient(145deg, #1a0f0a, #2c1810);
             padding: 25px;
             border-radius: 15px;
             min-width: 180px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.6),
-                        inset 0 0 15px rgba(255, 255, 255, 0.05);
+                        inset 0 0 15px rgba(255, 215, 0, 0.05);
         }
         .info div {
             margin-bottom: 20px;
             font-size: 1.3em;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -124,13 +124,13 @@
             width: 3px;
             height: 70%;
             background: linear-gradient(to bottom, 
-                rgba(0, 255, 255, 0) 0%,
-                rgba(0, 255, 255, 0.8) 50%,
-                rgba(0, 255, 255, 0) 100%);
+                rgba(255, 215, 0, 0) 0%,
+                rgba(255, 215, 0, 0.8) 50%,
+                rgba(255, 215, 0, 0) 100%);
         }
         .info span {
-            color: #0ff;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             font-size: 1.2em;
             margin-left: 10px;
         }
@@ -140,58 +140,113 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #2c1810, #1a0f0a);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            overflow: hidden;
+        }
+        .opening-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(-45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px);
+            pointer-events: none;
         }
         .opening-screen h1 {
             font-size: 4em;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                         0 0 40px rgba(255, 255, 255, 0.4);
-            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+                         0 0 40px rgba(255, 215, 0, 0.4);
+            margin-bottom: 60px;
             animation: pulse 2s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        .opening-screen h1::before,
+        .opening-screen h1::after {
+            content: '❖';
+            position: absolute;
+            color: rgba(255, 215, 0, 0.3);
+            font-size: 0.5em;
+        }
+        .opening-screen h1::before {
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .opening-screen h1::after {
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .opening-screen h1 .version {
+            font-size: 0.5em;
+            margin-top: 10px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
         }
         .opening-screen p {
             font-size: 1.5em;
             color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-top: 0;
+            margin-bottom: 40px;
             animation: fadeInOut 1.5s infinite;
+            position: relative;
+            z-index: 1;
         }
         .opening-screen .buttons {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 0;
+            align-items: center;
         }
         .opening-screen .button {
             padding: 15px 40px;
             font-size: 1.3em;
-            background: linear-gradient(145deg, #1a1a1a, #000000);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: linear-gradient(145deg, #3a2318, #2c1810);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: #ffd700;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             min-width: 200px;
             text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        .opening-screen .ranking-note {
+            font-size: 0.8em;
+            color: rgba(255, 215, 0, 0.7);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+            margin-top: -10px;
         }
         .opening-screen .button:hover {
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(145deg, #4a3128, #3a2318);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
         }
         .opening-screen .button.ranking {
-            background: linear-gradient(145deg, #0066cc, #004499);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            background: linear-gradient(145deg, #3a2318, #2c1810);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         .opening-screen .button.ranking:hover {
-            background: linear-gradient(145deg, #0077ee, #0055aa);
+            background: linear-gradient(145deg, #4a3128, #3a2318);
+            border-color: rgba(255, 215, 0, 0.5);
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -207,19 +262,19 @@
             display: none;  /* 初期状態では非表示 */
         }
         .controls {
-            background: linear-gradient(145deg, #000000, #1a1a1a);
+            background: linear-gradient(145deg, #1a0f0a, #2c1810);
             padding: 25px;
             border-radius: 15px;
             min-width: 200px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.6),
-                        inset 0 0 15px rgba(255, 255, 255, 0.05);
+                        inset 0 0 15px rgba(255, 215, 0, 0.05);
             margin-right: 30px;
         }
         .controls h2 {
-            color: #fff;
+            color: #ffd700;
             font-size: 1.5em;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -236,28 +291,28 @@
             width: 50px;
             height: 2px;
             background: linear-gradient(90deg, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.8) 50%,
-                rgba(255, 255, 255, 0) 100%);
+                rgba(255, 215, 0, 0) 0%,
+                rgba(255, 215, 0, 0.8) 50%,
+                rgba(255, 215, 0, 0) 100%);
         }
         .controls div {
             margin-bottom: 15px;
             font-size: 1.1em;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             display: flex;
             align-items: center;
             gap: 10px;
         }
         .controls .key {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 215, 0, 0.1);
             padding: 5px 10px;
             border-radius: 5px;
             min-width: 30px;
             text-align: center;
             font-weight: bold;
-            color: #0ff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         .gameover-screen {
             position: fixed;
@@ -281,18 +336,18 @@
             animation: pulse 2s infinite;
         }
         .gameover-screen .score-info {
-            background: linear-gradient(145deg, #000000, #1a1a1a);
+            background: linear-gradient(145deg, #1a0f0a, #2c1810);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
         }
         .gameover-screen .score-info div {
             margin: 10px 0;
             font-size: 1.5em;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         .gameover-screen .score-info .high-score {
             color: #ffd700;
@@ -301,8 +356,8 @@
         .gameover-screen p {
             margin-top: 30px;
             font-size: 1.2em;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             animation: fadeInOut 1.5s infinite;
         }
         .gameover-screen .buttons {
@@ -366,93 +421,124 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(44, 24, 16, 0.95);
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-
+        .ranking-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(-45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 10px);
+            pointer-events: none;
+        }
         .ranking-container {
-            background: linear-gradient(145deg, #000000, #1a1a1a);
+            background: linear-gradient(145deg, #2c1810, #1a0f0a);
             padding: 30px;
             border-radius: 15px;
             width: 80%;
             max-width: 500px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6),
+                        inset 0 0 20px rgba(255, 215, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
-
         .ranking-title {
             font-size: 2em;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
             margin-bottom: 20px;
             text-align: center;
+            position: relative;
         }
-
+        .ranking-title::before,
+        .ranking-title::after {
+            content: '❖';
+            position: absolute;
+            color: rgba(255, 215, 0, 0.3);
+            font-size: 0.5em;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .ranking-title::before {
+            left: -30px;
+        }
+        .ranking-title::after {
+            right: -30px;
+        }
         .ranking-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-
         .ranking-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             margin: 5px 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 215, 0, 0.1);
             border-radius: 8px;
-            color: #fff;
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
         }
-
+        .ranking-item:hover {
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateX(5px);
+        }
         .ranking-item.rank-1 {
-            background: linear-gradient(90deg, #ffd700, #ffa500);
-            color: #000;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+            border-color: rgba(255, 215, 0, 0.4);
         }
-
         .ranking-item.rank-2 {
-            background: linear-gradient(90deg, #c0c0c0, #a9a9a9);
+            background: linear-gradient(90deg, rgba(192, 192, 192, 0.3), rgba(192, 192, 192, 0.1));
+            border-color: rgba(192, 192, 192, 0.4);
         }
-
         .ranking-item.rank-3 {
-            background: linear-gradient(90deg, #cd7f32, #8b4513);
+            background: linear-gradient(90deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1));
+            border-color: rgba(205, 127, 50, 0.4);
         }
-
         .rank-number {
             font-weight: bold;
             margin-right: 10px;
+            color: #ffd700;
         }
-
         .player-name {
             flex-grow: 1;
             margin: 0 10px;
+            color: #ffd700;
         }
-
         .player-score {
             font-weight: bold;
-            color: #0ff;
+            color: #ffd700;
         }
-
         .close-ranking {
             margin-top: 20px;
             padding: 10px 20px;
-            background: linear-gradient(145deg, #1a1a1a, #000000);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: linear-gradient(145deg, #3a2318, #2c1810);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
-
         .close-ranking:hover {
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            background: linear-gradient(145deg, #4a3128, #3a2318);
+            border-color: rgba(255, 215, 0, 0.5);
             transform: scale(1.05);
         }
-
         .name-input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -463,7 +549,6 @@
             width: 200px;
             text-align: center;
         }
-
         .submit-score {
             background: linear-gradient(145deg, #1a1a1a, #000000);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -473,20 +558,114 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .submit-score:hover {
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             transform: scale(1.05);
+        }
+        /* ミノのアニメーション用スタイル */
+        .falling-mino {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+            opacity: 0.6;
+            transform-origin: center center;
+            will-change: transform;
+        }
+        @keyframes falling {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes swaying {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* テトロミノの形状 */
+        .mino-I::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(0% 25%, 100% 25%, 100% 75%, 0% 75%);
+        }
+        .mino-O::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(25% 25%, 75% 25%, 75% 75%, 25% 75%);
+        }
+        .mino-T::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(25% 0%, 75% 0%, 75% 75%, 50% 75%, 50% 100%, 25% 100%, 25% 75%, 0% 75%);
+        }
+        .mino-L::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(0% 0%, 25% 0%, 25% 75%, 75% 75%, 75% 100%, 0% 100%);
+        }
+        .mino-J::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(75% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%, 75% 75%);
+        }
+        .mino-S::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(25% 0%, 75% 0%, 75% 50%, 100% 50%, 100% 100%, 50% 100%, 50% 50%, 0% 50%);
+        }
+        .mino-Z::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            clip-path: polygon(0% 0%, 50% 0%, 50% 50%, 100% 50%, 100% 100%, 25% 100%, 25% 50%, 0% 50%);
         }
     </style>
 </head>
 <body>
     <!-- オープニング画面 -->
     <div class="opening-screen" id="openingScreen">
-        <h1>TETRIS99</h1>
+        <h1>KOMORIS<span class="version">Version 2</span></h1>
         <p>スペースキーでスタート</p>
         <div class="buttons">
             <button class="button ranking" onclick="showRanking()">ランキングを見る</button>
+            <div class="ranking-note">※ランキングへ登録される名前は自動生成されます</div>
         </div>
     </div>
 
@@ -534,7 +713,7 @@
             <div>今回のスコア: <span id="finalScore">0</span></div>
             <div class="high-score">ハイスコア: <span id="highScore">0</span></div>
         </div>
-        <p>クリックまたはスペースキーでリトライ</p>
+        <p>スペースキーでトップへ戻る</p>
     </div>
 
     <!-- ランキング画面 -->
@@ -1310,22 +1489,15 @@
             bgm.currentTime = 0;
         }
 
-        // ランダムな名前を生成する関数
+        // ランダムな日本語名を生成する関数
         function generateRandomName() {
-            const consonants = 'bcdfghjklmnpqrstvwxyz';
-            const vowels = 'aeiou';
-            let name = '';
+            const firstNames = ['たろう', 'じろう', 'さぶろう', 'はなこ', 'さくら', 'みどり', 'あかり', 'ゆうき', 'りんたろう', 'まさと'];
+            const lastNames = ['やまだ', 'たなか', 'さとう', 'すずき', 'たかはし', 'いとう', 'なかむら', 'こばやし', 'やまぐち', 'いのうえ'];
             
-            // 5文字の名前を生成
-            for (let i = 0; i < 5; i++) {
-                if (i % 2 === 0) {
-                    name += consonants[Math.floor(Math.random() * consonants.length)];
-                } else {
-                    name += vowels[Math.floor(Math.random() * vowels.length)];
-                }
-            }
+            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
             
-            return name.toUpperCase();
+            return lastName + ' ' + firstName;
         }
 
         // スコアを自動送信する関数
@@ -1448,13 +1620,13 @@
 
         // Firebase設定
         const firebaseConfig = {
-            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            authDomain: "tetris99-xxxxx.firebaseapp.com",
-            databaseURL: "https://tetris99-xxxxx.firebaseio.com",
-            projectId: "tetris99-xxxxx",
-            storageBucket: "tetris99-xxxxx.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef1234567890"
+            apiKey: "AIzaSyD687wy4-TuzQz4QN_VtZa5luwROl2ArGw",
+            authDomain: "tetris-v2-ranking.firebaseapp.com",
+            databaseURL: "https://tetris-v2-ranking-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "tetris-v2-ranking",
+            storageBucket: "tetris-v2-ranking.firebasestorage.app",
+            messagingSenderId: "252940372643",
+            appId: "1:252940372643:web:bafff22c37d59d35c60d16"
         };
 
         // Firebase初期化
@@ -1540,13 +1712,6 @@
                 });
         }
 
-        // ランキングボタンの追加（オープニング画面のみに表示）
-        // const rankingButton = document.createElement('button');
-        // rankingButton.className = 'button ranking';
-        // rankingButton.textContent = 'ランキングを見る';
-        // rankingButton.onclick = showRanking;
-        // document.querySelector('.opening-screen .buttons').appendChild(rankingButton);
-
         // Firebase接続状態の監視
         const connectedRef = database.ref(".info/connected");
         connectedRef.on("value", (snap) => {
@@ -1555,6 +1720,69 @@
             } else {
                 console.log("Firebase接続が切断されました");
             }
+        });
+
+        // ミノを生成する関数
+        function createFallingMino() {
+            const mino = document.createElement('div');
+            mino.className = 'falling-mino';
+            
+            // 7種類のミノを順番に使用
+            const shapes = ['J', 'L', 'S', 'Z', 'O', 'I', 'T'];
+            const colors = ['#0000f0', '#f0a000', '#00f000', '#f00000', '#f0f000', '#00f0f0', '#a000f0'];
+            const shapeIndex = Math.floor(Math.random() * shapes.length);
+            const shape = shapes[shapeIndex];
+            const color = colors[shapeIndex];
+            
+            mino.classList.add(`mino-${shape}`);
+            mino.style.color = color;
+            
+            // ランダムな開始位置
+            const startX = Math.random() * (window.innerWidth - 60);
+            mino.style.left = `${startX}px`;
+            
+            // 落下と回転のアニメーション
+            const fallDuration = 8 + Math.random() * 4;
+            const swayDuration = 3 + Math.random() * 2;
+            
+            // アニメーションを個別に設定
+            mino.style.animation = `
+                falling ${fallDuration}s linear forwards,
+                swaying ${swayDuration}s ease-in-out infinite
+            `;
+            
+            // ランダムな遅延
+            mino.style.animationDelay = `${Math.random() * 5}s`;
+            
+            document.querySelector('.opening-screen').appendChild(mino);
+            
+            // アニメーション終了後に要素を削除
+            mino.addEventListener('animationend', () => {
+                mino.remove();
+            });
+        }
+
+        // 定期的にミノを生成
+        function startFallingMinos() {
+            const MAX_MINOS = 15; // 最大ミノ数
+            
+            // 最初に10個のミノを生成
+            for (let i = 0; i < 10; i++) {
+                setTimeout(createFallingMino, i * 500);
+            }
+            
+            // その後、2秒ごとに新しいミノを生成
+            setInterval(() => {
+                const currentMinos = document.querySelectorAll('.falling-mino');
+                if (currentMinos.length < MAX_MINOS) {
+                    createFallingMino();
+                }
+            }, 2000);
+        }
+
+        // オープニング画面が表示されたときにミノのアニメーションを開始
+        document.addEventListener('DOMContentLoaded', () => {
+            startFallingMinos();
         });
     </script>
 </body>
