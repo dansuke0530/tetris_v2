@@ -859,8 +859,6 @@
 
         // オープニング効果音の再生タイミングを設定
         function playOpeningSound() {
-            if (!isAudioInitialized) return;
-            
             openingSound.currentTime = 0;
             openingSound.play().catch(error => {
                 console.log('オープニング効果音の再生がブロックされました:', error);
