@@ -147,6 +147,63 @@
             align-items: center;
             z-index: 1000;
             overflow: hidden;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .opening-screen h1 {
+            animation: slideInTitle 1s ease-out 0.3s both;
+        }
+
+        .opening-screen p {
+            animation: slideInText 1s ease-out 0.5s both;
+        }
+
+        .opening-screen .buttons {
+            animation: slideInButtons 1s ease-out 0.7s both;
+        }
+
+        @keyframes slideInTitle {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInText {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInButtons {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
         .opening-screen::before {
             content: '';
