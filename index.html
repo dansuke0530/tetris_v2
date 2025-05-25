@@ -946,14 +946,14 @@
             openingScreen.style.display = 'none';
             gameContainer.style.display = 'flex';
             
-            // オープニング効果音を再生
-            openingSound.currentTime = 0;
-            openingSound.play().catch(error => {
-                console.log('オープニング効果音の再生がブロックされました:', error);
-            });
-            
-            // 音声が初期化されている場合のみBGMを再生
+            // 音声が初期化されている場合のみ効果音とBGMを再生
             if (isAudioInitialized) {
+                // オープニング効果音を再生
+                openingSound.currentTime = 0;
+                openingSound.play().catch(error => {
+                    console.log('オープニング効果音の再生がブロックされました:', error);
+                });
+                
                 startBGM();
             }
             
