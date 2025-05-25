@@ -794,7 +794,7 @@
         <div class="buttons">
             <button class="button ranking" onclick="showRanking()">ランキングを見る</button>
             <div class="ranking-note">※ランキングへ登録される名前は自動生成されます</div>
-            <button class="button sound" id="soundButton">🔊 音声を有効にする</button>
+            <button class="button sound" onclick="initializeAudio()">🔊 音声を有効にする</button>
             <div class="sound-status">現在：無効</div>
         </div>
     </div>
@@ -919,9 +919,9 @@
                 // 音声を無効化
                 isAudioInitialized = false;
                 stopBGM();
-                soundButton.textContent = '🔊 音声を有効にする';
-                soundButton.style.opacity = '1';
-                soundButton.classList.remove('active');
+                document.querySelector('.button.sound').textContent = '🔊 音声を有効にする';
+                document.querySelector('.button.sound').style.opacity = '1';
+                document.querySelector('.button.sound').classList.remove('active');
                 document.querySelector('.sound-status').textContent = '現在：無効';
                 document.querySelector('.sound-status').classList.remove('active');
                 return;
@@ -948,9 +948,9 @@
                     bgm.currentTime = 0;
 
                     isAudioInitialized = true;
-                    soundButton.textContent = '🔇 音声を無効にする';
-                    soundButton.style.opacity = '0.7';
-                    soundButton.classList.add('active');
+                    document.querySelector('.button.sound').textContent = '🔇 音声を無効にする';
+                    document.querySelector('.button.sound').style.opacity = '0.7';
+                    document.querySelector('.button.sound').classList.add('active');
                     document.querySelector('.sound-status').textContent = '現在：有効';
                     document.querySelector('.sound-status').classList.add('active');
 
