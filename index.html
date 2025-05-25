@@ -760,7 +760,7 @@
         }
         /* カウントダウン表示用のスタイル */
         .countdown {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -963,6 +963,11 @@
         function startGame() {
             if (isGameStarted) return;
             
+            // オープニング画面を非表示にしてゲーム画面を表示
+            isGameStarted = true;
+            openingScreen.style.display = 'none';
+            gameContainer.style.display = 'flex';
+            
             // カウントダウンを開始
             let count = 3;
             countdownElement.style.display = 'flex';
@@ -976,12 +981,7 @@
                     clearInterval(countdownInterval);
                     countdownElement.style.display = 'none';
                     
-                    // ゲームを開始
-                    isGameStarted = true;
-                    openingScreen.style.display = 'none';
-                    gameContainer.style.display = 'flex';
-                    
-                    // 音声が初期化されている場合のみBGMを再生
+                    // カウントダウン終了後にゲームを初期化
                     if (isAudioInitialized) {
                         startBGM();
                     }
@@ -1529,6 +1529,13 @@
 
             const now = Date.now();
             const dropInterval = Math.max(100, 1000 - (level - 1) * 100); // レベルに応じて落下速度を調整
+
+            // カウントダウン中はミノを表示しない
+            if (countdownElement.style.display === 'flex') {
+                draw();
+                setTimeout(gameLoop, 1000 / 60);
+                return;
+            }
 
             if (!currentPiece && !isLocking) {
                 currentPiece = nextPiece || getNextFromBag();
