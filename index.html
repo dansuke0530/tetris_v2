@@ -196,7 +196,7 @@
             margin-top: 40px;
         }
         .opening-screen .button {
-            padding: 15px 40px;
+            padding: 15px 30px;  /* 40pxから30pxに変更 */
             font-size: 1.3em;
             background: rgba(26, 37, 47, 0.95);
             border: 2px solid #ffffff;
@@ -205,7 +205,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            min-width: 200px;
+            min-width: 150px;  /* 180pxから150pxに変更 */
             text-align: center;
         }
         .opening-screen .button:hover {
@@ -414,18 +414,19 @@
             border-radius: 8px;
             color: #ffffff;
             border: 1px solid #ffffff;
+            transition: all 0.3s ease;
         }
         .ranking-item.rank-1 {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            border: 2px solid #ffffff;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border: 2px solid #ffd700;
         }
         .ranking-item.rank-2 {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-            border: 1px solid #ffffff;
+            background: linear-gradient(90deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.1));
+            border: 2px solid #c0c0c0;
         }
         .ranking-item.rank-3 {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-            border: 1px solid #ffffff;
+            background: linear-gradient(90deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.1));
+            border: 2px solid #cd7f32;
         }
         .rank-number {
             font-weight: bold;
@@ -508,6 +509,84 @@
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
+        .countdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            font-size: 8em;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                         0 0 40px rgba(255, 255, 255, 0.4);
+            font-family: 'Noto Serif JP', serif;
+            animation: pulse 1s infinite;
+        }
+        .ranking-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .ranking-buttons .button {
+            padding: 12px 24px;
+            background: rgba(26, 37, 47, 0.95);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .ranking-buttons .button:hover {
+            background: rgba(44, 62, 80, 0.95);
+            transform: scale(1.05);
+        }
+        .ranking-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .ranking-buttons .button {
+            padding: 12px 24px;
+            background: rgba(26, 37, 47, 0.95);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .ranking-buttons .button:hover {
+            background: rgba(44, 62, 80, 0.95);
+            transform: scale(1.05);
+        }
+        .ranking-note {
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: fadeInOut 1.5s infinite;
+        }
+        /* 新規追加：TOP10の点滅アニメーション */
+        @keyframes highlightRank {
+            0% { border-color: #ffffff; }
+            50% { border-color: #ff0000; }
+            100% { border-color: #ffffff; }
+        }
+        .ranking-item.highlight {
+            animation: highlightRank 1s infinite;
+            border-width: 2px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -568,7 +647,7 @@
             <div>今回のスコア: <span id="finalScore">0</span></div>
             <div class="high-score">ハイスコア: <span id="highScore">0</span></div>
         </div>
-        <p>クリックまたはスペースキーでリトライ</p>
+        <p>スペースキーで次へ進む</p>
     </div>
 
     <!-- ランキング画面 -->
@@ -576,7 +655,10 @@
         <div class="ranking-container">
             <h2 class="ranking-title">RANKING</h2>
             <ul class="ranking-list" id="rankingList"></ul>
-            <button class="close-ranking" onclick="closeRanking()">閉じる</button>
+            <p class="ranking-note">スペースキーを押すとリトライできます</p>
+            <div class="ranking-buttons">
+                <button class="button back-to-top" onclick="backToTop()">トップへ戻る</button>
+            </div>
         </div>
     </div>
 
@@ -589,6 +671,9 @@
             <button class="submit-score" onclick="submitScore()">スコアを送信</button>
         </div>
     </div>
+
+    <!-- カウントダウン画面 -->
+    <div class="countdown" id="countdown">3</div>
 
     <audio id="bgm" loop>
         <source src="tetris_inst.wav" type="audio/wav">
@@ -628,19 +713,48 @@
         function startGame() {
             if (isGameStarted) return;
             
-            isGameStarted = true;
+            // オープニング画面を非表示
             openingScreen.style.display = 'none';
-            gameContainer.style.display = 'flex';
-            startBGM();
-            initializeBag();
-            gameLoop();
+            
+            // カウントダウン開始
+            const countdown = document.getElementById('countdown');
+            countdown.textContent = '3';  // 初期値を確実に3に設定
+            countdown.style.display = 'flex';
+            let count = 3;
+            
+            const countdownInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdown.textContent = count;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdown.style.display = 'none';
+                    
+                    // カウントダウン終了後にゲームを開始
+                    isGameStarted = true;
+                    gameContainer.style.display = 'flex';
+                    startBGM();
+                    initializeBag();
+                    gameLoop();
+                }
+            }, 1000);
         }
 
         // スペースキーでゲーム開始
         document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && !isGameStarted) {
-                e.preventDefault();  // スペースキーのデフォルト動作を防止
-                startGame();
+            if (e.code === 'Space') {
+                if (document.getElementById('gameoverScreen').style.display === 'flex') {
+                    e.preventDefault();
+                    // ゲームオーバー画面を非表示にしてランキングを表示
+                    document.getElementById('gameoverScreen').style.display = 'none';
+                    showRanking();
+                } else if (document.getElementById('rankingScreen').style.display === 'flex') {
+                    e.preventDefault();
+                    retry();
+                } else if (!isGameStarted) {
+                    e.preventDefault();
+                    startGame();
+                }
             }
         });
 
@@ -1373,6 +1487,7 @@
 
         // ゲーム開始時にBGMを再生
         function startBGM() {
+            if (!isAudioInitialized) return;  // 音声が無効の場合は再生しない
             bgm.play().catch(error => {
                 console.log('BGM再生エラー:', error);
             });
@@ -1384,31 +1499,46 @@
             bgm.currentTime = 0;
         }
 
-        // ランダムな名前を生成する関数
+        // ランダムな日本人名を生成する関数
         function generateRandomName() {
-            const consonants = 'bcdfghjklmnpqrstvwxyz';
-            const vowels = 'aeiou';
-            let name = '';
+            // よくある苗字のリスト
+            const lastNames = [
+                'さとう', 'すずき', 'たかはし', 'たなか', 'いとう', 'わたなべ', 'やまもと', 'なかむら',
+                'こばやし', 'かとう', 'よしだ', 'やまだ', 'ささき', 'やまぐち', 'さかい', 'まつもと',
+                'いのうえ', 'きむら', 'はやし', 'あべ', 'おかだ', 'よしもと', 'はた', 'なかじま',
+                'ふじた', 'もり', 'おおた', 'たけだ', 'いけだ', 'まえだ', 'ふじい', 'おおはし'
+            ];
             
-            // 5文字の名前を生成
-            for (let i = 0; i < 5; i++) {
-                if (i % 2 === 0) {
-                    name += consonants[Math.floor(Math.random() * consonants.length)];
-                } else {
-                    name += vowels[Math.floor(Math.random() * vowels.length)];
-                }
-            }
+            // よくある名前のリスト（男の子）
+            const maleNames = [
+                'はると', 'ゆうと', 'そうた', 'はるき', 'ゆうき', 'りくと', 'りょうた', 'たつき',
+                'かずき', 'しょうた', 'りく', 'ゆうた', 'はるた', 'りょうま', 'そうすけ', 'けんと',
+                'だいき', 'りょうすけ', 'ゆうすけ', 'しょう', 'たかし', 'けんじ', 'まさと', 'ひろき'
+            ];
             
-            return name.toUpperCase();
+            // よくある名前のリスト（女の子）
+            const femaleNames = [
+                'さくら', 'みく', 'めい', 'ゆい', 'りこ', 'あかり', 'まい', 'はな',
+                'みなみ', 'あい', 'りな', 'ゆうな', 'みほ', 'あやか', 'さき', 'ななみ',
+                'みゆ', 'かおり', 'まな', 'はるか', 'みき', 'あいり', 'さやか', 'みさき'
+            ];
+            
+            // 苗字をランダムに選択
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            
+            // 性別をランダムに決定（50%の確率）
+            const isMale = Math.random() < 0.5;
+            
+            // 性別に応じて名前を選択
+            const firstName = isMale 
+                ? maleNames[Math.floor(Math.random() * maleNames.length)]
+                : femaleNames[Math.floor(Math.random() * femaleNames.length)];
+            
+            return lastName + ' ' + firstName;
         }
 
         // スコアを自動送信する関数
         function autoSubmitScore() {
-            // 既に送信済みかチェック
-            if (localStorage.getItem('lastSubmittedScore') === score.toString()) {
-                return;
-            }
-
             const name = generateRandomName();
             const scoreData = {
                 name: name,
@@ -1420,23 +1550,40 @@
             database.ref('scores').push(scoreData)
                 .then(() => {
                     console.log('スコアを送信しました:', name, score);
-                    // 送信成功したスコアを記録
-                    localStorage.setItem('lastSubmittedScore', score.toString());
                 })
                 .catch((error) => {
                     console.error('スコア送信エラー:', error);
                 });
         }
 
-        // ゲームオーバー処理
+        // ゲームオーバー処理を更新
         function gameOver() {
             isGameStarted = false;
             stopBGM();
+            
+            // 現在のスコアを保存
+            window.currentScore = score;
+            
+            // ゲームの状態をリセット
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            currentPiece = null;
+            nextPiece = null;
+            holdPiece = null;
+            pieceBag = [];
+            combo = 0;
+            backToBack = false;
+            isLocked = false;
+            moveCount = 0;
+            isLocking = false;
             
             // ハイスコアの更新
             if (score > highScore) {
                 highScore = score;
                 localStorage.setItem('tetrisHighScore', highScore);
+                showSubmitScoreScreen();  // ハイスコア達成時にスコア送信画面を表示
+            } else {
+                // ハイスコア未達成の場合でもスコアを送信
+                autoSubmitScore();
             }
             
             // ゲームオーバー画面の表示
@@ -1444,17 +1591,12 @@
             document.getElementById('finalScore').textContent = score;
             document.getElementById('highScore').textContent = highScore;
             gameoverScreen.style.display = 'flex';
-            
-            // スコアが1000点以上の場合のみ自動送信
-            if (score >= 1000) {
-                setTimeout(autoSubmitScore, 100);
-            }
         }
 
-        // リトライ処理
+        // リトライ処理を更新
         function retry() {
-            // ゲームオーバー画面を非表示
-            document.getElementById('gameoverScreen').style.display = 'none';
+            // ランキング画面を非表示
+            document.getElementById('rankingScreen').style.display = 'none';
             
             // ゲームのリセット
             board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
@@ -1467,37 +1609,18 @@
             combo = 0;
             backToBack = false;
             isGameStarted = false;
+            isLocked = false;
+            moveCount = 0;
+            isLocking = false;
             
             // UIの更新
             scoreElement.textContent = score;
             levelElement.textContent = level;
             linesElement.textContent = lines;
             
-            // オープニング画面を表示
-            openingScreen.style.display = 'flex';
-            gameContainer.style.display = 'none';
-            
-            // BGMを停止
-            stopBGM();
+            // ゲーム開始
+            startGame();
         }
-
-        // クリックでリトライ
-        document.getElementById('gameoverScreen').addEventListener('click', () => {
-            retry();
-        });
-
-        // スペースキーの動作を統合
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                if (document.getElementById('gameoverScreen').style.display === 'flex') {
-                    e.preventDefault();
-                    retry();
-                } else if (!isGameStarted) {
-                    e.preventDefault();
-                    startGame();
-                }
-            }
-        });
 
         // 一時停止/再開の切り替え
         function togglePause() {
@@ -1508,10 +1631,14 @@
             
             if (isPaused) {
                 pauseOverlay.style.display = 'flex';
-                bgm.pause();  // BGMも一時停止
+                if (isAudioInitialized) {  // 音声が有効な場合のみBGMを一時停止
+                    bgm.pause();
+                }
             } else {
                 pauseOverlay.style.display = 'none';
-                bgm.play();   // BGMを再開
+                if (isAudioInitialized) {  // 音声が有効な場合のみBGMを再開
+                    bgm.play();
+                }
                 // 再開時に状態をリセット
                 lastMoveTime = Date.now();
                 isLocked = false;
@@ -1522,13 +1649,7 @@
 
         // Firebase設定
         const firebaseConfig = {
-            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            authDomain: "tetris99-xxxxx.firebaseapp.com",
-            databaseURL: "https://tetris99-xxxxx.firebaseio.com",
-            projectId: "tetris99-xxxxx",
-            storageBucket: "tetris99-xxxxx.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef1234567890"
+            databaseURL: "https://tetris-v2-ranking-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
 
         // Firebase初期化
@@ -1551,7 +1672,7 @@
             }
         }
 
-        // ランキングデータの読み込み
+        // ランキングデータの読み込みを更新
         function loadRanking() {
             const rankingList = document.getElementById('rankingList');
             rankingList.innerHTML = '';
@@ -1566,10 +1687,19 @@
                     // スコアを降順にソート
                     scores.sort((a, b) => b.score - a.score);
 
+                    // 現在のスコアがTOP10に入っているかチェック
+                    const isInTop10 = scores.some(s => s.score === window.currentScore);
+
                     // ランキング表示
                     scores.forEach((score, index) => {
                         const li = document.createElement('li');
                         li.className = `ranking-item rank-${index + 1}`;
+                        
+                        // 現在のスコアと一致し、かつTOP10に入っている場合のみハイライト
+                        if (score.score === window.currentScore && isInTop10) {
+                            li.classList.add('highlight');
+                        }
+                        
                         li.innerHTML = `
                             <span class="rank-number">#${index + 1}</span>
                             <span class="player-name">${score.name}</span>
@@ -1624,6 +1754,7 @@
                 // 音声を無効化
                 isAudioInitialized = false;
                 stopBGM();
+                bgm.muted = true;  // BGMをミュート
                 const soundButton = document.querySelector('.button.sound');
                 soundButton.textContent = '🔊 音声を有効にする';
                 soundButton.style.opacity = '1';
@@ -1639,6 +1770,7 @@
 
             // BGMの初期化
             bgm.volume = 0.3;
+            bgm.muted = false;  // BGMのミュートを解除
             
             // 音声を初期化
             const initAudio = async () => {
@@ -1672,6 +1804,7 @@
                     alert('音声の初期化に失敗しました。ブラウザの設定を確認してください。');
                     // エラー時に状態をリセット
                     isAudioInitialized = false;
+                    bgm.muted = true;  // エラー時もミュート
                     const soundButton = document.querySelector('.button.sound');
                     soundButton.textContent = '🔊 音声を有効にする';
                     soundButton.style.opacity = '1';
@@ -1700,6 +1833,35 @@
         // 定期的にミノを生成する関数を削除
         function startFallingMinos() {
             return;
+        }
+
+        // トップへ戻る処理を更新
+        function backToTop() {
+            // ランキング画面を非表示
+            document.getElementById('rankingScreen').style.display = 'none';
+            
+            // ゲームの状態を完全にリセット
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            score = 0;
+            level = 1;
+            lines = 0;
+            holdPiece = null;
+            nextPiece = null;
+            pieceBag = [];
+            combo = 0;
+            backToBack = false;
+            isGameStarted = false;
+            isLocked = false;
+            moveCount = 0;
+            isLocking = false;
+            
+            // UIの更新
+            scoreElement.textContent = score;
+            levelElement.textContent = level;
+            linesElement.textContent = lines;
+            
+            // オープニング画面を表示
+            openingScreen.style.display = 'flex';
         }
     </script>
 </body>
