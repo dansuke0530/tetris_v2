@@ -1576,9 +1576,8 @@
 
         // スコアを自動送信する関数
         function autoSubmitScore() {
-            const name = generateRandomName();
             const scoreData = {
-                name: name,
+                name: window.currentPlayerName,  // 保存したプレイヤー名を使用
                 score: score,
                 timestamp: firebase.database.ServerValue.TIMESTAMP
             };
@@ -1586,7 +1585,7 @@
             // 送信を試みる
             database.ref('scores').push(scoreData)
                 .then(() => {
-                    console.log('スコアを送信しました:', name, score);
+                    console.log('スコアを送信しました:', window.currentPlayerName, score);
                 })
                 .catch((error) => {
                     console.error('スコア送信エラー:', error);
@@ -1598,8 +1597,9 @@
             isGameStarted = false;
             stopBGM();
             
-            // 現在のスコアを保存
+            // 現在のスコアと名前を保存
             window.currentScore = score;
+            window.currentPlayerName = generateRandomName();
             
             // ゲームの状態をリセット
             board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
@@ -1649,6 +1649,7 @@
             isLocked = false;
             moveCount = 0;
             isLocking = false;
+            window.isGameOverRanking = false;  // ランキング表示フラグをリセット
             
             // UIの更新
             scoreElement.textContent = score;
@@ -1724,19 +1725,10 @@
                     // スコアを降順にソート
                     scores.sort((a, b) => b.score - a.score);
 
-                    // 現在のスコアがTOP10に入っているかチェック
-                    const isInTop10 = scores.some(s => s.score === window.currentScore);
-
                     // ランキング表示
                     scores.forEach((score, index) => {
                         const li = document.createElement('li');
                         li.className = `ranking-item rank-${index + 1}`;
-                        
-                        // 現在のスコアと一致し、かつTOP10に入っている場合のみハイライト
-                        if (score.score === window.currentScore && isInTop10) {
-                            li.classList.add('highlight');
-                        }
-                        
                         li.innerHTML = `
                             <span class="rank-number">#${index + 1}</span>
                             <span class="player-name">${score.name}</span>
@@ -1891,6 +1883,7 @@
             isLocked = false;
             moveCount = 0;
             isLocking = false;
+            window.isGameOverRanking = false;  // ランキング表示フラグをリセット
             
             // UIの更新
             scoreElement.textContent = score;
