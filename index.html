@@ -2023,6 +2023,11 @@
 
         // オープニング画面が表示されたときにミノのアニメーションを開始
         document.addEventListener('DOMContentLoaded', () => {
+            // 音声ボタンのクリックイベントを設定
+            const soundButton = document.querySelector('.button.sound');
+            soundButton.addEventListener('click', initializeAudio);
+            
+            // ミノのアニメーションを開始
             startFallingMinos();
         });
 
