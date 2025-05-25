@@ -845,59 +845,12 @@
     <audio id="gameoverSound">
         <source src="gameover.wav" type="audio/wav">
     </audio>
-    <audio id="openingSound">
-        <source src="opening.mp3" type="audio/mpeg">
-    </audio>
     <script>
         // BGMの設定
         const bgm = document.getElementById('bgm');
         const gameoverSound = document.getElementById('gameoverSound');
-        const openingSound = document.getElementById('openingSound');
         bgm.volume = 0.3;  // 音量を30%に設定
         gameoverSound.volume = 0.5;  // ゲームオーバー音の音量を50%に設定
-        openingSound.volume = 0.5;  // オープニング効果音の音量を50%に設定
-
-        // オープニング効果音の再生タイミングを設定
-        function playOpeningSound() {
-            // 音声コンテキストの作成と初期化
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioContext = new AudioContext();
-
-            // 音声コンテキストを開始
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-
-            openingSound.currentTime = 0;
-            openingSound.play().catch(error => {
-                console.log('オープニング効果音の再生がブロックされました:', error);
-            });
-        }
-
-        // ページ読み込み時に音声を初期化
-        document.addEventListener('DOMContentLoaded', () => {
-            // 音声コンテキストの作成
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioContext = new AudioContext();
-
-            // 音声コンテキストを開始
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-
-            // オープニング効果音を再生
-            openingSound.currentTime = 0;
-            openingSound.play().catch(error => {
-                console.log('オープニング効果音の初期再生がブロックされました:', error);
-            });
-        });
-
-        // アニメーションの開始時に効果音を再生
-        document.addEventListener('animationstart', (e) => {
-            if (e.target.classList.contains('opening-screen')) {
-                playOpeningSound();
-            }
-        });
 
         // キャンバスの設定
         const gameCanvas = document.getElementById('game');
