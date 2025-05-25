@@ -845,17 +845,12 @@
     <audio id="gameoverSound">
         <source src="sound_effects/gameover.wav" type="audio/wav">
     </audio>
-    <audio id="openingSound">
-        <source src="sound_effects/opening.mp3" type="audio/mpeg">
-    </audio>
     <script>
         // BGMの設定
         const bgm = document.getElementById('bgm');
         const gameoverSound = document.getElementById('gameoverSound');
-        const openingSound = document.getElementById('openingSound');
         bgm.volume = 0.3;  // 音量を30%に設定
         gameoverSound.volume = 0.5;  // ゲームオーバー音の音量を50%に設定
-        openingSound.volume = 0.5;  // オープニング効果音の音量を50%に設定
 
         // キャンバスの設定
         const gameCanvas = document.getElementById('game');
@@ -946,14 +941,8 @@
             openingScreen.style.display = 'none';
             gameContainer.style.display = 'flex';
             
-            // 音声が初期化されている場合のみ効果音とBGMを再生
+            // 音声が初期化されている場合のみBGMを再生
             if (isAudioInitialized) {
-                // オープニング効果音を再生
-                openingSound.currentTime = 0;
-                openingSound.play().catch(error => {
-                    console.log('オープニング効果音の再生がブロックされました:', error);
-                });
-                
                 startBGM();
             }
             
