@@ -147,61 +147,77 @@
             align-items: center;
             z-index: 1000;
             overflow: hidden;
-            animation: slideIn 0.8s ease-out;
+            animation: expandIn 1s ease-out;
         }
 
-        @keyframes slideIn {
+        @keyframes expandIn {
             0% {
-                transform: translateX(-100%);
+                transform: scale(0);
                 opacity: 0;
             }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
             100% {
-                transform: translateX(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
 
         .opening-screen h1 {
-            animation: slideInTitle 1s ease-out 0.3s both;
+            animation: expandInTitle 1.2s ease-out 0.2s both;
         }
 
         .opening-screen p {
-            animation: slideInText 1s ease-out 0.5s both;
+            animation: expandInText 1.2s ease-out 0.4s both;
         }
 
         .opening-screen .buttons {
-            animation: slideInButtons 1s ease-out 0.7s both;
+            animation: expandInButtons 1.2s ease-out 0.6s both;
         }
 
-        @keyframes slideInTitle {
+        @keyframes expandInTitle {
             0% {
-                transform: translateX(-100%);
+                transform: scale(0);
                 opacity: 0;
             }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
             100% {
-                transform: translateX(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
 
-        @keyframes slideInText {
+        @keyframes expandInText {
             0% {
-                transform: translateX(-100%);
+                transform: scale(0);
                 opacity: 0;
             }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
             100% {
-                transform: translateX(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
 
-        @keyframes slideInButtons {
+        @keyframes expandInButtons {
             0% {
-                transform: translateX(-100%);
+                transform: scale(0);
                 opacity: 0;
             }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
             100% {
-                transform: translateX(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
